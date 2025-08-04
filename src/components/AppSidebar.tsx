@@ -33,7 +33,7 @@ const toolsItems = [
 ];
 
 export function AppSidebar() {
-  const { collapsed } = useSidebar();
+  const { state } = useSidebar();
   const location = useLocation();
   const currentPath = location.pathname;
 
@@ -48,7 +48,7 @@ export function AppSidebar() {
       : "hover:bg-sidebar-accent/50 hover:text-sidebar-accent-foreground";
 
   return (
-    <Sidebar className={collapsed ? "w-16" : "w-64"} collapsible>
+    <Sidebar className={state === "collapsed" ? "w-16" : "w-64"} collapsible="icon">
       <SidebarContent className="bg-sidebar text-sidebar-foreground">
         {/* Logo Section */}
         <div className="p-6 border-b border-sidebar-border">
@@ -56,7 +56,7 @@ export function AppSidebar() {
             <div className="w-8 h-8 rounded-lg bg-gradient-primary flex items-center justify-center">
               <Mic className="w-4 h-4 text-white" />
             </div>
-            {!collapsed && (
+            {state !== "collapsed" && (
               <div>
                 <h1 className="text-lg font-bold text-sidebar-primary">RT.Meet</h1>
                 <p className="text-xs text-sidebar-foreground/60">AI Meeting Assistant</p>
@@ -68,7 +68,7 @@ export function AppSidebar() {
         {/* Navigation */}
         <SidebarGroup className="px-4 py-2">
           <SidebarGroupLabel className="text-sidebar-foreground/60 uppercase text-xs font-medium">
-            {!collapsed && "Navigation"}
+            {state !== "collapsed" && "Navigation"}
           </SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
@@ -81,7 +81,7 @@ export function AppSidebar() {
                       className={getNavClass({ isActive: isActive(item.url) })}
                     >
                       <item.icon className="w-4 h-4" />
-                      {!collapsed && <span>{item.title}</span>}
+                      {state !== "collapsed" && <span>{item.title}</span>}
                     </NavLink>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
@@ -93,7 +93,7 @@ export function AppSidebar() {
         {/* Tools Section */}
         <SidebarGroup className="px-4 py-2">
           <SidebarGroupLabel className="text-sidebar-foreground/60 uppercase text-xs font-medium">
-            {!collapsed && "Tools"}
+            {state !== "collapsed" && "Tools"}
           </SidebarGroupLabel>
           <SidebarGroupContent>
             <SidebarMenu>
@@ -105,7 +105,7 @@ export function AppSidebar() {
                       className={getNavClass({ isActive: isActive(item.url) })}
                     >
                       <item.icon className="w-4 h-4" />
-                      {!collapsed && <span>{item.title}</span>}
+                      {state !== "collapsed" && <span>{item.title}</span>}
                     </NavLink>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
@@ -124,7 +124,7 @@ export function AppSidebar() {
                   className={getNavClass({ isActive: isActive("/settings") })}
                 >
                   <Settings className="w-4 h-4" />
-                  {!collapsed && <span>Settings</span>}
+                  {state !== "collapsed" && <span>Settings</span>}
                 </NavLink>
               </SidebarMenuButton>
             </SidebarMenuItem>
